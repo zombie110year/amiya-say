@@ -2,6 +2,7 @@
 name = "amiya-say"
 version = "0.1.0"
 authors = ["zombie110year <zombie110year@outlook.com>"]
+description = "类似于 cowsay，但可在 $XDG_DATA_HOME/amiya-say/roles/ 中自由添加字符画"
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

@@ -1,9 +1,11 @@
 use amiya_say::build;
-use clap::{App, Arg, SubCommand};
+use clap::{app_from_crate, crate_authors, crate_description, crate_name, crate_version};
+use clap::{Arg, SubCommand};
 
 fn main() {
-    let app = App::new("amiya-say").subcommand(
+    let app = app_from_crate!().subcommand(
         SubCommand::with_name("say")
+            .about("将一句话配入对话框，并与角色一同显示")
             .arg(
                 Arg::with_name("role")
                     .short("r")
