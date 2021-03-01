@@ -2,6 +2,7 @@ mod dialog;
 
 use std::{
     fs::{read_dir, read_to_string},
+    io::{Error, ErrorKind},
     path::PathBuf,
 };
 
@@ -16,9 +17,29 @@ pub fn build(text: &str, name: &str) -> String {
 fn find_role_dir() -> PathBuf {
     let role_dir1 = std::env::current_dir().unwrap().join("resources/roles");
     let role_dir2 = dirs::data_dir().unwrap().join("amiya-say/roles");
-    if role_dir1.metadata().unwrap().is_dir() {
+    if role_dir1
+        .metadata()
+        .and_then(|x| {
+            if x.is_dir() {
+                Ok(())
+            } else {
+                Err(Error::new(ErrorKind::InvalidData, "not a directory"))
+            }
+        })
+        .is_ok()
+    {
         role_dir1
-    } else if role_dir2.metadata().unwrap().is_dir() {
+    } else if role_dir2
+        .metadata()
+        .and_then(|x| {
+            if x.is_dir() {
+                Ok(())
+            } else {
+                Err(Error::new(ErrorKind::InvalidData, "not a directory"))
+            }
+        })
+        .is_ok()
+    {
         role_dir2
     } else {
         panic!("找不到资源目录 amiya-say/roles");
