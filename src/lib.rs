@@ -9,7 +9,11 @@ use std::{
 use dirs;
 
 pub fn build(text: &str, name: &str) -> String {
-    let dialog_box = dialog::dialog(text.to_string()).unwrap();
+    let dialog_box = if name.ends_with("bilibili") {
+        dialog::dialog_nobox(text.to_string()).unwrap()
+    } else {
+        dialog::dialog_withbox(text.to_string()).unwrap()
+    };
     let role = find_role(name);
     return format!("{}{}", dialog_box, role);
 }
