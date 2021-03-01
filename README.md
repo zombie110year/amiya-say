@@ -17,8 +17,8 @@
 # 使用方法
 
 ```sh
-# 排版
-amiya-say say [-r|--role <角色名>] <语句>
+# 从 stdin 读取文本排版
+amiya-say say [-r|--role <角色名>]
 ```
 
 ```sh
@@ -29,7 +29,7 @@ amiya-say list
 例如
 
 ```sh
-$ amiya-say say -r amiya.term '博士不可以休息哦'
+$ echo '博士不可以休息哦' | amiya-say say -r amiya.term
 ```
 
 ```txt

@@ -1,6 +1,7 @@
 use amiya_say::{build, list_roles};
 use clap::{app_from_crate, crate_authors, crate_description, crate_name, crate_version};
 use clap::{Arg, SubCommand};
+use std::io::{stdin, Read};
 
 fn main() {
     let app = app_from_crate!()
@@ -12,21 +13,16 @@ fn main() {
                         .short("r")
                         .long("role")
                         .default_value("amiya.term"),
-                )
-                .arg(Arg::with_name("text")),
+                ),
         )
         .subcommand(SubCommand::with_name("list").about("列出已找到的角色名"));
     let args = app.get_matches();
     match args.subcommand() {
         ("say", Some(say_args)) => {
-            println!(
-                "{}",
-                build(
-                    say_args.value_of("text").unwrap(),
-                    say_args.value_of("role").unwrap()
-                )
-            )
-        },
+            let mut text = String::new();
+            stdin().read_to_string(&mut text).unwrap();
+            println!("{}", build(text.trim(), say_args.value_of("role").unwrap()))
+        }
         ("list", _) => {
             let roles = list_roles();
             for role in roles {
