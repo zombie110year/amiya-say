@@ -1,4 +1,5 @@
 mod dialog;
+mod fuzzyset;
 
 use std::{
     fs::{read_dir, read_to_string},
@@ -53,8 +54,12 @@ fn find_role_dir() -> PathBuf {
 fn find_role(name: &str) -> String {
     let role_dir = find_role_dir();
     let role_path = role_dir.join(format!("{}.txt", &name));
-    let role = read_to_string(role_path).unwrap();
-    return role;
+    if let Ok(role) = read_to_string(role_path) {
+        return role;
+    } else {
+        let similar_role = fuzzyset::fuzzymatch(name.to_string(), list_roles());
+        panic!("没有名为 '{}' 的角色，是否为 '{}'", &name, &similar_role);
+    }
 }
 
 pub fn list_roles() -> Vec<String> {
