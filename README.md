@@ -10,7 +10,7 @@
     因此需要比终端版多一些空格。由于 B 站评论区会自动裁剪首位空格，因此在第一个字符用 `.` 占位。
     并且，手机客户端评论区宽度大约为 21 个汉字。
 3. B 站版字符画命名为 `*.bilibili.txt`，终端版命名为 `*.term.txt` 。
-4. 字符画资源存储在 `$XDG_DATA_HOME/amiya-say/roles/` 下[^1]。
+4. 字符画资源存储在 `$XDG_DATA_HOME/amiyasay/roles/` 下[^1]。
 
 [^1]: https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
 
@@ -18,18 +18,18 @@
 
 ```sh
 # 从 stdin 读取文本排版
-amiya-say say [-r|--role <角色名>]
+amiyasay say [-r|--role <角色名>]
 ```
 
 ```sh
 # 列出可用的角色
-amiya-say list
+amiyasay list
 ```
 
 例如
 
 ```sh
-$ echo '博士不可以休息哦' | amiya-say say -r amiya.term
+$ echo '博士不可以休息哦' | amiyasay say -r amiya.term
 ```
 
 ```txt

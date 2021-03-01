@@ -1,4 +1,4 @@
-use amiya_say::{build, list_roles};
+use amiyasay::{build, list_roles};
 use clap::{app_from_crate, crate_authors, crate_description, crate_name, crate_version};
 use clap::{Arg, SubCommand};
 use std::io::{stdin, Read};

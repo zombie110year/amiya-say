@@ -20,7 +20,7 @@ pub fn build(text: &str, name: &str) -> String {
 
 fn find_role_dir() -> PathBuf {
     let role_dir1 = std::env::current_dir().unwrap().join("resources/roles");
-    let role_dir2 = dirs::data_dir().unwrap().join("amiya-say/roles");
+    let role_dir2 = dirs::data_dir().unwrap().join("amiyasay/roles");
     if role_dir1
         .metadata()
         .and_then(|x| {
@@ -46,7 +46,7 @@ fn find_role_dir() -> PathBuf {
     {
         role_dir2
     } else {
-        panic!("找不到资源目录 amiya-say/roles");
+        panic!("找不到资源目录 amiyasay/roles");
     }
 }
 
