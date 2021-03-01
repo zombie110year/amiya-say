@@ -1,6 +1,9 @@
 mod dialog;
 
-use std::{fs::read_to_string, path::PathBuf};
+use std::{
+    fs::{read_dir, read_to_string},
+    path::PathBuf,
+};
 
 use dirs;
 
@@ -27,4 +30,14 @@ fn find_role(name: &str) -> String {
     let role_path = role_dir.join(format!("{}.txt", &name));
     let role = read_to_string(role_path).unwrap();
     return role;
+}
+
+pub fn list_roles() -> Vec<String> {
+    let role_dir = find_role_dir();
+    let roles: Vec<String> = read_dir(role_dir)
+        .unwrap()
+        .map(|x| x.unwrap())
+        .map(|x| x.path().file_stem().unwrap().to_str().unwrap().to_string())
+        .collect();
+    roles
 }
