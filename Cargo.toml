@@ -10,3 +10,4 @@ edition = "2018"
 [dependencies]
 dirs = "3"
 clap = "2"
+triple_accel = "0.3.4"

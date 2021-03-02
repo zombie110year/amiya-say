@@ -6,6 +6,7 @@ version = "0.1.0"
 dependencies = [
  "clap",
  "dirs",
+ "triple_accel",
 ]
 
 [[package]]
@@ -202,6 +203,12 @@ checksum = "d326610f408c7a4eb6f51c37c330e496b08506c9457c9d34287ecc38809fb060"
 dependencies = [
  "unicode-width",
 ]
+
+[[package]]
+name = "triple_accel"
+version = "0.3.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "622b09ce2fe2df4618636fb92176d205662f59803f39e70d1c333393082de96c"
 
 [[package]]
 name = "unicode-width"
