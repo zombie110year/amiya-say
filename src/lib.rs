@@ -9,6 +9,9 @@ use std::{
 
 use dirs;
 
+use colored::Colorize;
+pub use fuzzyset::fuzzymatch;
+
 pub fn build(text: &str, name: &str) -> String {
     let dialog_box = if name.ends_with("bilibili") {
         dialog::dialog_nobox(text.to_string()).unwrap()
@@ -47,7 +50,12 @@ fn find_role_dir() -> PathBuf {
     {
         role_dir2
     } else {
-        panic!("找不到资源目录 amiyasay/roles");
+        println!(
+            "{} 找不到资源目录 '{}'",
+            "error:".bright_red(),
+            "amiyasay/roles".bright_green()
+        );
+        std::process::exit(-1);
     }
 }
 
@@ -57,8 +65,15 @@ fn find_role(name: &str) -> String {
     if let Ok(role) = read_to_string(role_path) {
         return role;
     } else {
-        let similar_role = fuzzyset::fuzzymatch(name.to_string(), list_roles());
-        panic!("没有名为 '{}' 的角色，是否为 '{}'", &name, &similar_role);
+        let similar_role =
+            fuzzyset::fuzzymatch(name, list_roles().iter().map(|s| s.as_str()).collect());
+        println!(
+            "{} 没有名为 '{}' 的角色，是否为 '{}'",
+            "error:".bright_red(),
+            &name.bright_yellow(),
+            &similar_role.bright_green()
+        );
+        std::process::exit(-1);
     }
 }
 
